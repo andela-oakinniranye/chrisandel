@@ -3,3 +3,5 @@ config/config.yml
 # Ignore application configuration
 /config/application.yml
 codesnip
+
+temp

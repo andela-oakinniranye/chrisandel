@@ -3,7 +3,7 @@
 </div>
 <div class="tp-caption" data-hoffset="0" data-scrolloffset="0" data-speed="400" data-voffset="50" data-x="center" data-y="center" style="z-index: 8;">
   <% if current_user.pair.nil? %>
-  <a class="btn" href='/get_pair' id="get_pair_btn">Get Pair</a>
+  <a class="btn" href='/get_pair' id="get_pair_btn" data-userinformation="<%= current_user.google_auth_id %>" >Get Pair</a>
   <% else %>
   <a class="btn" href='/view_pair' id="view_pair_btn">View Pair</a>
   <% end %>

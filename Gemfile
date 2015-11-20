@@ -13,7 +13,8 @@ gem 'sinatra-flash'
 # gem 'rack-flash3'
 gem 'sinatra-redirect-with-flash'
 
-group :development, :test do
+group :development do
+  gem 'sqlite3'
   gem 'dm-sqlite-adapter'
 end
 

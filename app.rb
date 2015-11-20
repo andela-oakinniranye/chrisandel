@@ -52,13 +52,15 @@ get '/view_pair' do
 end
 
 post '/get_pair' do
-  return redirect '/' unless current_user
-  current_user.generate_pair
+  user_id = params[:uuser]
+  user = User.first(google_auth_id: user_id);
+  return redirect '/' unless user
+  user.generate_pair
 end
 
 get '/login' do
 
-  erb :login
+  erb :welcome
 end
 
 get '/home' do
