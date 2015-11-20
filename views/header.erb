@@ -1,0 +1,25 @@
+  <!-- Header -->
+  <header class="header">
+    <div class="sticky">
+      <div class="container-fluid">
+        <div class="logo"> <a href="/"><img src="/images/andelogo_.png" alt=""></a></div>
+
+        <!-- Nav -->
+        <nav>
+          <ul id="ownmenu" class="ownmenu">
+            <% if current_user %>
+              <li class="active"><a href="#">Account </a>
+              <ul class="dropdown">
+                <li><a href="/view_pair">View Pair</a></li>
+                <li><a href="/logout">Log Out</a></li>
+              </ul>
+            <% else %>
+              <li class="active"><a href="/">home </a>
+            <% end %>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- End Header -->

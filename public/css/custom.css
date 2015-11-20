@@ -1,0 +1,8 @@
+.tp-loader.spinner0, .tp-loader.spinner1, .tp-loader.spinner5{
+  display: none;
+  visibility: hidden;
+}
+
+.pair-name{
+  top: 40% !important;
+}
