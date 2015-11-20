@@ -59,7 +59,6 @@ post '/get_pair' do
 end
 
 get '/login' do
-
   erb :welcome
 end
 
@@ -83,6 +82,10 @@ end
 get '/logout' do
   session.clear
   redirect '/'
+end
+
+get '/dashboard' do
+  @all_unpaired = User.unpaired
 end
 
 helpers do
