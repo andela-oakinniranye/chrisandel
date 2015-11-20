@@ -15,5 +15,4 @@ gem 'sinatra-redirect-with-flash'
 
 group :development, :test do
   gem 'dm-sqlite-adapter'
-
 end
