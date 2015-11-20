@@ -72,8 +72,7 @@ get '/auth/:name/callback' do
   @auth = request.env['omniauth.auth']
   @user = User.first_or_create(email: @auth.info.email, google_auth_id: @auth.uid)
   unless @user.valid?
-    flash[:error] = "Please use an Email registered to an Andela account: (***abc***@andela.com)"
-    return redirect '/login', error: "Please use an Email registered to an Andela account: (***abc***@andela.com)"
+    return redirect '/', error: "Please use an official Andela Email Address: (*@andela.com).\nIf you still encounter this error afterwards,\nPlease contact the Lagos' People Intern"
   end
   session[:user_id] = @user.id
   redirect '/home'
@@ -89,6 +88,11 @@ get '/dashboard' do
 end
 
 helpers do
+    def nl2br(string)
+     if string
+       string.gsub("\n\r","<br />").gsub("\r", "").gsub("\n", "<br />")
+     end
+   end
   def current_user
     @user = User.get(session[:user_id]) if session[:user_id]
   end
