@@ -8,27 +8,27 @@
 -------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------
-body 
+body
  + WRAP
  + HEADER
  + NAVIGATION
  + BANNER
  + SERVICES
  + OUR FEATURED FOUNDERS
- + BLOG UPDATES 
+ + BLOG UPDATES
  + APPOINMENT
  + NEWS FROM BLOG
  + PARTNERS / CLIENTS
  + FOOTER
  + SOCIAL ICONS
  + MEGA MENU
- + 3 MENU LEVEL 
+ + 3 MENU LEVEL
 -------------------------------------------------------------------*/
 /*=======================================================
       IMPORT FILE
 ========================================================*/
-@import url("../fonts/montserrat-fonts.css");
-@import url("animate.css");
+@import url("/fonts/montserrat-fonts.css");
+@import url("/css/animate.css");
 /*=======================================================
       THEME STYLING START
 ========================================================*/
@@ -392,138 +392,6 @@ header nav li a:after {
 	-moz-transition: all 0.2s;
 	-o-transition: all 0.2s;
 	transition: all 0.2s;
-}
-header .ownmenu li.active .dropdown a:after {
-	opacity: 0;
-}
-header .ownmenu li.active .dropdown a:hover:after {
-	opacity: 1;
-}
-header nav li .dropdown a:after {
-	height: 1px;
-	bottom: -1px;
-}
-header .ownmenu li .dropdown a:hover:after {
-	width: 100%;
-}
-header nav li .megamenu a:after {
-	height: 1px;
-	bottom: -1px;
-}
-header .ownmenu ul.dropdown {
-	padding-bottom: 0px;
-	background: #141414;
-	padding: 5px 0px;
-}
-header .ownmenu ul.dropdown li a {
-	text-transform: uppercase;
-	line-height: 20px;
-	background: none;
-	color: #6f6f6f !important;
-	font-size: 12px;
-	display: inline-block;
-	width: 100%;
-	font-weight: normal;
-	letter-spacing: 0px;
-	padding-right: 0px;
-	text-align: left;
-	padding: 7px 20px;
-	border-bottom:1px solid rgba(255,255,255,0.06);
-}
-header .ownmenu ul.dropdown li:nth-last-child(1) a{
-	border-bottom:none;
-}
-header .ownmenu ul.dropdown li a:hover {
-	color: #fff !important;
-	background: none;
-}
-header .ownmenu li > .megamenu li a:hover {
-	color: #fff !important;
-}
-header .ownmenu li > .megamenu li a {
-	text-transform: uppercase;
-	border: none !important;
-	line-height: 40px;
-	background: none;
-	color: #6f6f6f !important;
-	font-size: 12px;
-	display: inline-block;
-	width: 100%;
-	font-weight: normal;
-	letter-spacing: 0px;
-	padding-right: 0px;
-	text-align: left;
-	padding: 0px;
-}
-header ul.dropdown {
-}
-header .ownmenu .megamenu hr {
-	width: 23px;
-	height: 3px;
-	background: #eeb013;
-	margin: 15px 0px;
-	border: none;
-	display: inline-block;
-}
-header ul.dropdown li {
-	padding: 0px;
-}
-header ul.dropdown li:hover {
-	background: none
-}
-header .ownmenu .megamenu h6 {
-	color: #fff;
-	font-size: 12px;
-	font-weight: normal;
-	text-transform: uppercase;
-	margin-top: 0px;
-}
-header .ownmenu .megamenu img {
-	width: auto;
-	margin-top: -1px;
-}
-header .ownmenu > li > .megamenu.full-width {
-	background: #141414;
-	padding: 50px;
-	padding-bottom: 40px;
-}
-header .ownmenu > li > .megamenu.full-width li {
-	text-align: left;
-}
-header nav .ownmenu .indicator {
-	margin-left: 5px;
-	display: none;
-}
-.sticky-wrapper {
-	height: auto !important;
-}
-.sticky-wrapper .sticky {
-	width: 100%;
-}
-.is-sticky .sticky .logo {
-	margin-top: 0px;
-}
-.is-sticky .sticky {
-	padding-top: 15px;
-	padding-bottom: 15px;
-	background: rgba(0,0,0,0.9);
-	-webkit-transition: all 0.4s ease-in-out;
-	-moz-transition: all 0.4s ease-in-out;
-	-o-transition: all 0.4s ease-in-out;
-	-ms-transition: all 0.4s ease-in-out;
-	transition: all 0.4s ease-in-out;
-}
-.ownmenu ul.dropdown {
-	top: 51px;
-}
-.is-sticky .sticky .ownmenu ul.dropdown {
-	top: 71px;
-}
-.is-sticky .sticky .ownmenu ul.dropdown li ul.dropdown{
-	top:inherit;
-}
-.ownmenu > li > .megamenu {
-	top: 46px;
 }
 .home-agency {
 	text-align: center;

@@ -1,2 +1,9 @@
-<div class="alert alert-danger"><%= styled_flash %></div>
-<a href='/auth/google_oauth2'>Sign in with your Andela Email Address</a>
+<div class="box text-center">
+  <% if flash[:error] %>
+    <div class="col-xs-8 col-xs-offset-2 col-sm-8 col-sm-offset-2 alert alert-warning"><%= flash[:error] %>
+    </div>
+  <% end %>
+  <a class="btn btn-transparent cust_btn" href="/auth/google_oauth2">
+    <i class="fa fa-google-plus-square"></i>
+    Sign In With Andela Account</a>
+</div>

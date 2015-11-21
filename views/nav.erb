@@ -1,0 +1,31 @@
+<header class="header navbar navbar-fixed-top">
+  <div class="container">
+
+    <div class="navbar-header">
+      <button aria-controls="navbar" aria-expanded="false" class="navbar-toggle collapsed" data-target="#navbar" data-toggle="collapse" type="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <img src="/images/andelogo_.png">
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbar">
+      <nav>
+      <ul class="ownmenu" id="ownmenu">
+        <% unless current_user %>
+        <li class="active"><a href="#">Account</a>
+          <ul class="dropdown">
+            <li><a href="/view_pair">View Pair</a></li>
+            <li><a href="/logout">Log Out</a></li>
+          </ul>
+          <% else %>
+            <li class="active"><a href="/">home </a>
+          <% end %>
+        </li>
+      </ul>
+    </nav>
+    </div>
+  </div>
+</header>

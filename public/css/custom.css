@@ -4,5 +4,11 @@
 }
 
 .pair-name{
+  font-size: 1.5em;
+  color: white;
   top: 40% !important;
+}
+
+header{
+  margin-top: 0px;
 }

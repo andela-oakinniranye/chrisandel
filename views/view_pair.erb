@@ -1,0 +1,17 @@
+<div class="box text-center">
+
+  <div class="pair-name" style="<%= 'display: none' unless @show_pair %>">
+    <%= current_user.pair %>
+  </div>
+  <div class="custom_button_stuff" style="z-index: 8;">
+    <% if current_user.pair.nil? %>
+    <a class="btn btn-transparent cust_btn" data-userinformation="<%= current_user.google_auth_id %>" href='/get_pair' id="get_pair_btn">
+      Get Pair
+    </a>
+    <% else %>
+    <a class="btn btn-transparent cust_btn" href='/view_pair' id="view_pair_btn">
+      View Pair
+    </a>
+    <% end %>
+  </div>
+</div>

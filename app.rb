@@ -41,14 +41,14 @@ enable :sessions
 get '/' do
   return redirect '/home' if current_user
   @title = "Welcome"
-  erb :welcome
+  erb :login##, layout: :layout2
 end
 
 get '/view_pair' do
   return redirect '/' unless current_user
   @title = "View Pair"
   @show_pair = true
-  erb :get_pair
+  erb :view_pair
 end
 
 post '/get_pair' do
@@ -59,13 +59,13 @@ post '/get_pair' do
 end
 
 get '/login' do
-  erb :welcome
+  erb :login
 end
 
 get '/home' do
   return redirect '/login' unless current_user
   @title = "Home"
-  erb :get_pair
+  erb :view_pair
 end
 
 get '/auth/:name/callback' do
@@ -84,7 +84,13 @@ get '/logout' do
 end
 
 get '/dashboard' do
-  @all_unpaired = User.unpaired
+  return redirect '/', error: "You are not authorized to be here" unless(current_user && (current_user.email == $andelans[121] || current_user.email == $andelans[113] || current_user.email == $andelans[11]))
+  @registered_but_unpaired = User.unpaired
+  @not_registered = User.not_registered
+  @registered = User.all_registered
+  @registered_and_paired = User.paired
+  @recs = [@registered_but_unpaired.size, @not_registered.size, @registered.size, @registered_and_paired.size].max
+  erb :dashboard, layout: :admin
 end
 
 helpers do

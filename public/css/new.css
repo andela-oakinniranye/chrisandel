@@ -1,0 +1,41 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+.wrap {
+  height: inherit;
+  width: 100%;
+  position: relative;
+  /*background-color: rgba(0,0,0,0.4);*/
+}
+body {
+  background: url("/images/slides/slide-bg-2.jpg") no-repeat center center fixed;
+  /*background-attachment: fixed;*/
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.main {
+  display: flex;
+  height: 60%;
+  justify-content: center;
+  align-content: center;
+}
+a.cust_btn {
+  text-transform: uppercase;
+  border: 1px solid #fff;
+  background: none;
+  font-size: 16px;
+  padding: 20px 20px;
+  color: #fff;
+  border-radius: 0px;
+}
+a.cust_btn:hover {
+  background-color: #fff;
+  color: #000;
+}
+.box {
+  position: relative;
+  top: 50%;
+}
