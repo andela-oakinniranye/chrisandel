@@ -84,7 +84,7 @@ get '/logout' do
 end
 
 get '/dashboard' do
-  return redirect '/', error: "You are not authorized to be here" unless(current_user && (current_user.email == $andelans[121] || current_user.email == $andelans[113] || current_user.email == $andelans[11]))
+  return redirect '/', error: "You are not authorized to visit this route" unless(current_user && (current_user.email == $andelans[121] || current_user.email == $andelans[113] || current_user.email == $andelans[11]))
   @registered_but_unpaired = User.unpaired
   @not_registered = User.not_registered
   @registered = User.all_registered
