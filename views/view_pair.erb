@@ -1,7 +1,10 @@
 <div class="box text-center">
 
   <div class="pair-name" style="<%= 'display: none' unless @show_pair %>">
-    <%= current_user.pair %>
+    <% if current_user.pair %>
+    <div><%= current_user.pair.name_from_email %></div>
+    <div><%= current_user.pair %></div>
+    <% end %>
   </div>
   <div class="custom_button_stuff" style="z-index: 8;">
     <% if current_user.pair.nil? %>
@@ -9,9 +12,11 @@
       Get Pair
     </a>
     <% else %>
-    <a class="btn btn-transparent cust_btn" href='/view_pair' id="view_pair_btn">
-      View Pair
-    </a>
+      <% unless @show_pair %>
+        <a class="btn btn-transparent cust_btn" href='/view_pair' id="view_pair_btn">
+          View Pair
+        </a>
+      <% end %>
     <% end %>
   </div>
 </div>

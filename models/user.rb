@@ -5,6 +5,7 @@ require 'dm-validations'
 
 class User
   include DataMapper::Resource
+  # include Andela
 
   property :id, Serial
 	property :google_auth_id, String
@@ -29,6 +30,12 @@ class User
   def self.unpaired
     all(pair: nil)
   end
+
+  # def pair_name
+  #   self.pair.match(/(.*)@andela.com/)
+  #   name = $1
+  #   name.split('.').map{|n| n.capitalize }.join(' ')
+  # end
 
   def self.not_registered
     registered = all_registered

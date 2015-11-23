@@ -13,14 +13,24 @@ require 'csv'
 
 set :bind, '0.0.0.0'
 
+String.class_eval do
+  def name_from_email
+    self.match(/(.*)@andela.com/)
+    name = $1
+    name.split('.').map{|n| n.capitalize }.join(' ') if name
+  end
+end
+
     ande = CSV.open('andelans.csv').to_a.flatten
-    $andelans = []
+    $andelans = LazyArray.new
     ande.each{ |n|
       if n
         n = n.strip
         $andelans << n if n.match(/.*@andela.com$/)
       end
     }
+
+
 
 APP_ROOT = Pathname.new(File.expand_path('../', __FILE__))
 
@@ -84,13 +94,19 @@ get '/logout' do
 end
 
 get '/dashboard' do
-  return redirect '/', error: "You are not authorized to visit this route" unless(current_user && (current_user.email == $andelans[121] || current_user.email == $andelans[113] || current_user.email == $andelans[11]))
+  return redirect '/', error: "You are not authorized to visit this route" unless(current_user && (current_user.email == "oreoluwa.akinniranye@andela.com" || current_user.email == "sayo.alagbe@andela.com" || current_user.email == "akonam.ikpelue@andela.com"))
   @registered_but_unpaired = User.unpaired
   @not_registered = User.not_registered
   @registered = User.all_registered
   @registered_and_paired = User.paired
   @recs = [@registered_but_unpaired.size, @not_registered.size, @registered.size, @registered_and_paired.size].max
   erb :dashboard, layout: :admin
+end
+
+get '/all_pairs' do
+  # User.collect
+  @users = User.paired
+  erb :all_pairs, layout: :admin
 end
 
 helpers do

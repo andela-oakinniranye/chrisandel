@@ -63,6 +63,37 @@ var TableManaged = function () {
             jQuery('#sample_1_wrapper .dataTables_length select').addClass("form-control input-xsmall"); // modify table per page dropdown
             //jQuery('#sample_1_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
 
+
+
+
+
+
+            $('#sample_2').dataTable({
+              "aoColumns": [
+                { "bSortable": false },
+                { "bSortable": false }
+              ],
+                "aLengthMenu": [
+                    [5, 15, 20, -1],
+                    [5, 15, 20, "All"] // change per page values here
+                ],
+                // set the initial value
+                "iDisplayLength": 10,
+                "sPaginationType": "bootstrap",
+                "oLanguage": {
+                    "sLengthMenu": "_MENU_ records",
+                    "oPaginate": {
+                        "sPrevious": "Prev",
+                        "sNext": "Next"
+                    }
+                },
+                "aoColumnDefs": [{
+                        'bSortable': false,
+                        'aTargets': [0]
+                    }
+                ]
+            });
+
         }
 
     };

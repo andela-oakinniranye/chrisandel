@@ -18,7 +18,8 @@ $(function(){
       $('div.pair-name').text(data).show();
       $(this_btn).hide();
     }).fail(function(jqXHR, textStatus){
-      $('div.pair-name').text("Please Try Again").css({'font-size': '20px'}).addClass('text-center').show();
+      $('div.pair-name').html("<div class='col-xs-8 col-xs-offset-2 col-sm-8 col-sm-offset-2 alert alert-warning'>Please Try Again</div>").css({"font-size": '1em'}).show();
+      // $('div.pair-name').text("Please Try Again").css({'font-size': '20px'}).addClass('text-center').show();
       $(this_btn).attr('disabled', false).text('Get Pair');
     });
   });
