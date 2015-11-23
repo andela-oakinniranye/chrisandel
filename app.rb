@@ -21,6 +21,10 @@ String.class_eval do
   end
 end
 
+def authorized_users
+  ["oreoluwa.akinniranye@andela.com", "sayo.alagbe@andela.com", "akonam.ikpelue@andela.com"]
+end
+
     ande = CSV.open('andelans.csv').to_a.flatten
     $andelans = LazyArray.new
     ande.each{ |n|
@@ -94,7 +98,7 @@ get '/logout' do
 end
 
 get '/dashboard' do
-  return redirect '/', error: "You are not authorized to visit this route" unless(current_user && (current_user.email == "oreoluwa.akinniranye@andela.com" || current_user.email == "sayo.alagbe@andela.com" || current_user.email == "akonam.ikpelue@andela.com"))
+  return redirect '/', error: "You are not authorized to visit this route" unless(current_user && (authorized_users.include? current_user.email ))
   @registered_but_unpaired = User.unpaired
   @not_registered = User.not_registered
   @registered = User.all_registered
@@ -104,7 +108,7 @@ get '/dashboard' do
 end
 
 get '/all_pairs' do
-  # User.collect
+  return redirect '/', error: "You are not authorized to visit this route" unless(current_user && (authorized_users.include? current_user.email))
   @users = User.paired
   erb :all_pairs, layout: :admin
 end
