@@ -120,6 +120,6 @@ helpers do
   end
 
   def authorized_users
-    ["oreoluwa.akinniranye@andela.com", "sayo.alagbe@andela.com", "akonam.ikpelue@andela.com"]
+    %w(akonam.ikpelue@andela.com helen.eboagwu@andela.com gbenga@andela.com sayo.alagbe@andela.com oreoluwa.akinniranye@andela.com)
   end
 end
