@@ -21,10 +21,6 @@ String.class_eval do
   end
 end
 
-def authorized_users
-  ["oreoluwa.akinniranye@andela.com", "sayo.alagbe@andela.com", "akonam.ikpelue@andela.com"]
-end
-
     ande = CSV.open('andelans.csv').to_a.flatten
     $andelans = LazyArray.new
     ande.each{ |n|
@@ -121,5 +117,9 @@ helpers do
    end
   def current_user
     @user = User.get(session[:user_id]) if session[:user_id]
+  end
+
+  def authorized_users
+    ["oreoluwa.akinniranye@andela.com", "sayo.alagbe@andela.com", "akonam.ikpelue@andela.com"]
   end
 end
