@@ -9,6 +9,8 @@ html, body {
   /*background-color: rgba(0,0,0,0.4);*/
 }
 body {
+  /*background: url("https://cdn3.colorlib.com/wp/wp-content/uploads/sites/2/colorlib-christmas.png") no-repeat center center fixed;*/
+  /*background: url("http://graphicloads.com/wp-content/uploads/2015/11/Red-Tree-1366x768.jpg") no-repeat center center fixed;*/
   background: url("/images/slides/slide-bg-2.jpg") no-repeat center center fixed;
   /*background-attachment: fixed;*/
   -webkit-background-size: cover;
@@ -19,6 +21,7 @@ body {
 .main {
   display: flex;
   height: 60%;
+  flex-direction: column;
   justify-content: center;
   align-content: center;
 }
@@ -37,5 +40,27 @@ a.cust_btn:hover {
 }
 .box {
   position: relative;
-  top: 50%;
+  top: 30%;
+}
+
+a.btn_float{
+  position: fixed;
+  bottom: 10;
+  right: 10;
+  background-color: #f44336;
+  color: rgba(255,255,255,.84);
+  border-radius: 100%;
+  box-shadow: 0 1px 6px 0 rgba(0,0,0,.12),0 1px 6px 0 rgba(0,0,0,.12);
+  margin: 0px;
+  padding: 15px;
+  width: 56px;
+  height: 56px;
+  border: 1px solid #fff;
+  font-size: 18px;
+}
+
+a.btn_float:hover {
+  border: 1px solid #f44336;
+  background-color: #fff;
+  color: rgba(255,0,0,.84);
 }
