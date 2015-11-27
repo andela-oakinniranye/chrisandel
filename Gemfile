@@ -10,7 +10,7 @@ gem 'dotenv'
 gem 'datamapper'
 gem 'dm-types'
 gem 'sinatra-flash'
-# gem 'rack-flash3'
+gem 'thin'
 gem 'sinatra-redirect-with-flash'
 
 group :development do
