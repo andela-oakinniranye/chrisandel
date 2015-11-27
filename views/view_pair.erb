@@ -1,10 +1,11 @@
 <div class="box text-center">
-
-  <div class="pair-name" style="<%= 'display: none' unless @show_pair %>">
-    <% if current_user.pair %>
-    <div><%= current_user.pair.name_from_email %></div>
-    <div><%= current_user.pair %></div>
-    <% end %>
+  <div class="col-md-4 col-md-offset-4 pair" style="<%= 'display: none' unless @show_pair %>">
+    <div class="pair-name">
+      <% if current_user.pair %>
+      <div><%= current_user.pair.name_from_email %></div>
+      <div><%= current_user.pair %></div>
+      <% end %>
+    </div>
   </div>
   <div class="custom_button_stuff" style="z-index: 8;">
     <% if current_user.pair.nil? %>

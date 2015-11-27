@@ -1,8 +1,25 @@
 $(function(){
+
+  // $(".btn_float").hover(function(){
+  //   console.log("I got here");
+  //   $(this).hide();
+  //   $(".btn_custom").show();
+  // });
+  // $(".btn_custom").blur(function(){
+  //   console.log("I got two");
+  //   $(this).hide();
+  //   $(".btn_float").show();
+  // });
+  // $(".btn_custom").mouseoutup(function(){
+  //   console.log("I got two");
+  //   $(this).hide();
+  //   $(".btn_float").show();
+  // });
+
   $('a#view_pair_btn').click(function(e){
     e.preventDefault();
     $(this).hide();
-    $('div.pair-name').show();
+    $('div.pair').show();
   });
 
   $("a#get_pair_btn").click(function(e){

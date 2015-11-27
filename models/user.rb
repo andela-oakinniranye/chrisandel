@@ -12,7 +12,7 @@ class User
 	property :email, String, format: lambda{|n| $andelans.include? n } , required: true, unique: true
   property :pair, String, format: :email_address, unique: true
 
-  def generate_pair
+  def generate_racpair
     return self.pair if self.pair
     @pair_delans ||= $andelans.select{|n| n != self.email }
     begin

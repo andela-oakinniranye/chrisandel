@@ -6,13 +6,9 @@ html, body {
   height: inherit;
   width: 100%;
   position: relative;
-  /*background-color: rgba(0,0,0,0.4);*/
 }
-body {
-  /*background: url("https://cdn3.colorlib.com/wp/wp-content/uploads/sites/2/colorlib-christmas.png") no-repeat center center fixed;*/
-  /*background: url("http://graphicloads.com/wp-content/uploads/2015/11/Red-Tree-1366x768.jpg") no-repeat center center fixed;*/
-  background: url("/images/slides/slide-bg-2.jpg") no-repeat center center fixed;
-  /*background-attachment: fixed;*/
+div.wrap {
+  background: url("/images/slides/slide-bg-31.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -25,42 +21,49 @@ body {
   justify-content: center;
   align-content: center;
 }
-a.cust_btn {
+
+  a.cust_btn {
   text-transform: uppercase;
-  border: 1px solid #fff;
-  background: none;
+  border: 1px solid #810806;
+  background-color: #b70704;
   font-size: 16px;
   padding: 20px 20px;
-  color: #fff;
+  color: #ffba41;
   border-radius: 0px;
 }
 a.cust_btn:hover {
-  background-color: #fff;
-  color: #000;
+  background-color: #810806;
+  border: 1px solid #b70704;
+  color: #ffba41;
 }
 .box {
   position: relative;
   top: 30%;
 }
 
-a.btn_float{
+a.btn_custom{
+  height: 56px;
   position: fixed;
   bottom: 10;
   right: 10;
-  background-color: #f44336;
-  color: rgba(255,255,255,.84);
-  border-radius: 100%;
-  box-shadow: 0 1px 6px 0 rgba(0,0,0,.12),0 1px 6px 0 rgba(0,0,0,.12);
-  margin: 0px;
-  padding: 15px;
-  width: 56px;
-  height: 56px;
-  border: 1px solid #fff;
-  font-size: 18px;
+  background: none;
+  border-radius: 40px;
+  border-color: #92610c;
+  color: #92610c;
 }
 
-a.btn_float:hover {
-  border: 1px solid #f44336;
-  background-color: #fff;
-  color: rgba(255,0,0,.84);
+a.btn_custom:hover {
+  border-color: #ffba41;
+  color: #ffba41;
+  background-color: #b47506;
+}
+a.btn_custom:active {
+  color: rgba(255,255,255,.84);
+}
+
+.pair-name{
+  padding: 1em;
+  background-color: rgba(255,255,255,.94);
+  color: #f00;
+  border-radius: 50px;
 }
