@@ -51,7 +51,7 @@ enable :sessions
 get '/' do
   return redirect '/home' if current_user
   @title = "Welcome"
-  erb :login##, layout: :layout2
+  erb :login
 end
 
 get '/view_pair' do
@@ -82,7 +82,7 @@ get '/auth/:name/callback' do
   @auth = request.env['omniauth.auth']
   @user = User.first_or_create(email: @auth.info.email, google_auth_id: @auth.uid)
   unless @user.valid?
-    return redirect '/', error: "Please use an official Andela Email Address: (*@andela.com).\nIf you still encounter this error afterwards,\nPlease contact the Lagos' People Intern"
+    return redirect '/', error: "Please use an official Andela Email Address: (*@andela.com)."
   end
   session[:user_id] = @user.id
   redirect '/home'
