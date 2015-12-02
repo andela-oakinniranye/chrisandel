@@ -16,7 +16,6 @@ $(function(){
       data: {uuser: this_data}
     }).done(function(data){
       $(this_btn).hide();
-      console.log(data);
       $('div.pair-name').html("<div>" + data + "</div>");
       $('div.pair').show();
     }).fail(function(jqXHR, textStatus){
