@@ -5,7 +5,6 @@ require 'dm-validations'
 
 class User
   include DataMapper::Resource
-  # include Andela
 
   property :id, Serial
 	property :google_auth_id, String
@@ -17,8 +16,10 @@ class User
     @pair_delans ||= $andelans.select{|n| n != self.email }
     begin
       pair = @pair_delans.sample
+      pair_user = User.first(email: pair)
+
       self.pair = pair
-    end while(User.first(pair: pair) || self.email == pair )
+    end while(User.first(pair: pair) || self.email == pair || (pair_user && pair_user.pair == self.email) )
     self.save
     self.pair
   end
@@ -31,12 +32,6 @@ class User
     all(pair: nil)
   end
 
-  # def pair_name
-  #   self.pair.match(/(.*)@andela.com/)
-  #   name = $1
-  #   name.split('.').map{|n| n.capitalize }.join(' ')
-  # end
-
   def self.not_registered
     registered = all_registered
     $andelans.select{ |n|
@@ -46,5 +41,13 @@ class User
 
   def self.all_registered
     collect{|n| n.email }
+  end
+
+  def self.breakpoints
+    select{ |user|
+      pair = user.pair
+      pair_user = first(email: pair)
+      (pair_user && pair_user.pair == user.email)
+    }
   end
 end
