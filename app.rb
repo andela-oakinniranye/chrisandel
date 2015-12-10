@@ -13,6 +13,12 @@ require 'csv'
 
 set :bind, '0.0.0.0'
 
+Object.class_eval do
+  def blank?
+    respond_to?(:empty?) ? !!empty? : !self
+  end
+end
+
 String.class_eval do
   def name_from_email
     self.match(/(.*)@andela.com/)
@@ -22,6 +28,16 @@ String.class_eval do
 end
 
     ande = CSV.open('andelans.csv').to_a.flatten
+    gifts = CSV.open('santa_responses.csv', headers: true)
+    $user_gifts = {}
+    gifts.each{ |user|
+      user_name = user['Username']
+      next if user_name.blank?
+      user_name = user_name.strip
+      gift =  user["What gifts would you like? Put in your wishlist! Three options only, please!"]
+      $user_gifts[user_name] = gift
+    }
+
     $andelans = LazyArray.new
     ande.each{ |n|
       if n
@@ -115,6 +131,7 @@ helpers do
        string.gsub("\n\r","<br />").gsub("\r", "").gsub("\n", "<br />")
      end
    end
+
   def current_user
     @user = User.get(session[:user_id]) if session[:user_id]
   end

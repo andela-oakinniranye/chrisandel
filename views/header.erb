@@ -3,8 +3,6 @@
     <div class="sticky">
       <div class="container-fluid">
         <div class="logo"> <a href="/"><img src="/images/andelogo_.png" alt=""></a></div>
-
-        <!-- Nav -->
         <nav>
           <ul id="ownmenu" class="ownmenu">
             <% if current_user %>
@@ -13,6 +11,7 @@
                 <% if authorized_users.include? current_user.email %>
                   <li><a href="/dashboard">Dashboard</a></li>
                 <% end %>
+                <li><a href="#" data-toggle="modal" data-target="#pair_giftModal">View Pair's Wishlist</a></li>
                 <li><a href="/view_pair">View Pair</a></li>
                 <li><a href="/logout">Log Out</a></li>
               </ul>
@@ -25,4 +24,8 @@
       </div>
     </div>
   </header>
+
+  <% if current_user.pair %>
+    <%= erb :pair_gift %>
+  <% end %>
   <!-- End Header -->

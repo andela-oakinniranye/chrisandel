@@ -12,3 +12,7 @@
 header{
   margin-top: 0px;
 }
+.btn.wishlist_btn{
+  background-color: #fdb94e;
+  color: white;
+}

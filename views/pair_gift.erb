@@ -1,0 +1,13 @@
+<div id="pair_giftModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h5>What <%= current_user.pair.name_from_email %> wants for Christmas </h5>
+      </div>
+      <div class="modal-body">
+        <%= nl2br current_user.pair_gift %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,9 +1,12 @@
+
 <div class="box text-center">
   <div class="col-md-4 col-md-offset-4 pair" style="<%= 'display: none' unless @show_pair %>">
     <div class="pair-name">
       <% if current_user.pair %>
+      <%#= erb :pair_gift %>
       <div><%= current_user.pair.name_from_email %></div>
       <div><%= current_user.pair %></div>
+      <!-- <a href="#" class="btn wishlist_btn text-center" data-toggle="modal" data-target="#pair_giftModal" alt="View Wishlist" title="View Wishlist">Wishlist</a> -->
       <% end %>
     </div>
   </div>

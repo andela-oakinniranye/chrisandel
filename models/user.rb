@@ -24,6 +24,10 @@ class User
     self.pair
   end
 
+  def pair_gift
+    $user_gifts[self.pair] || "No Gift Registered Yet"
+  end
+
   def self.paired
     all(:pair.not => nil)
   end
