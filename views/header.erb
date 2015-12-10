@@ -11,7 +11,9 @@
                 <% if authorized_users.include? current_user.email %>
                   <li><a href="/dashboard">Dashboard</a></li>
                 <% end %>
-                <li><a href="#" data-toggle="modal" data-target="#pair_giftModal">View Pair's Wishlist</a></li>
+                <% if current_user.pair%>
+                  <li><a href="#" data-toggle="modal" data-target="#pair_giftModal">View Pair's Wishlist</a></li>
+                <% end %>
                 <li><a href="/view_pair">View Pair</a></li>
                 <li><a href="/logout">Log Out</a></li>
               </ul>
@@ -25,7 +27,7 @@
     </div>
   </header>
 
-  <% if current_user.pair %>
+  <% if current_user && current_user.pair %>
     <%= erb :pair_gift %>
   <% end %>
   <!-- End Header -->
