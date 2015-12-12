@@ -12,6 +12,7 @@ gem 'dm-types'
 gem 'sinatra-flash'
 gem 'thin'
 gem 'sinatra-redirect-with-flash'
+gem 'emoji-js'
 
 group :development do
   gem 'sqlite3'
