@@ -8,5 +8,6 @@ development.db
 .gitignore2
 33333333333andelans.csv
 *not_registered.txt
+*report*
 
 temp

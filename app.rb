@@ -46,8 +46,6 @@ end
       end
     }
 
-
-
 APP_ROOT = Pathname.new(File.expand_path('../', __FILE__))
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
