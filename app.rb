@@ -13,6 +13,8 @@ require 'csv'
 
 set :bind, '0.0.0.0'
 
+$andela_mail = /.*@andela.com$/
+
 Object.class_eval do
   def blank?
     respond_to?(:empty?) ? !!empty? : !self
@@ -21,7 +23,7 @@ end
 
 String.class_eval do
   def name_from_email
-    self.match(/(.*)@andela.com/)
+    self.match($andela_mail)
     name = $1
     name.split('.').map{|n| n.capitalize }.join(' ') if name
   end
@@ -42,9 +44,13 @@ end
     ande.each{ |n|
       if n
         n = n.strip
-        $andelans << n if n.match(/.*@andela.com$/)
+        $andelans << n if n.match($andela_mail)
       end
     }
+
+    $uninterested_fellows = CSV.open('uninterested.csv').to_a.flatten.select! do |f|
+      f && f.match($andela_mail)
+    end
 
 APP_ROOT = Pathname.new(File.expand_path('../', __FILE__))
 
