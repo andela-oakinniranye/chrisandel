@@ -40,7 +40,7 @@ class User
     def not_registered
       registered = all_registered
       $andelans.select do |n|
-        !registered.include? n
+        !registered.include?(n) && !$uninterested_fellows.include?(n)
       end
     end
 
