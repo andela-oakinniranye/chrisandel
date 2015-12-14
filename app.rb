@@ -48,9 +48,11 @@ end
       end
     }
 
-    $uninterested_fellows = CSV.open('uninterested.csv').to_a.flatten.select! do |f|
+    uninterested_fellows = CSV.open('uninterested.csv').to_a.flatten.select! do |f|
       f && f.match($andela_mail)
     end
+
+    $uninterested_fellows = uninterested_fellows || []
 
 APP_ROOT = Pathname.new(File.expand_path('../', __FILE__))
 
@@ -83,7 +85,7 @@ end
 
 post '/get_pair' do
   user_id = params[:uuser]
-  user = User.first(google_auth_id: user_id);
+  user = User.first(google_auth_id: user_id)
   return redirect '/' unless user
   user.generate_pair
 end
