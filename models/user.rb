@@ -67,16 +67,16 @@ class User
 
     def remove_pair
       fellows = all(email: ($wants_pair_changed || []))
-      puts fellows.collect(&:email)
+      # puts fellows.collect(&:email)
       fellows.update(pair: nil)
     end
 
     def check_pair(email)
-      first(pair: email)
+      all(pair: email)
     end
 
     def find_by_email(email)
-      first(email: email)
+      all(email: email)
     end
   end
 end
