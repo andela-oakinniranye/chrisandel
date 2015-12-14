@@ -23,7 +23,7 @@ end
 
 String.class_eval do
   def name_from_email
-    self.match($andela_mail)
+    self.match(/(.*)@andela.com$/)
     name = $1
     name.split('.').map{|n| n.capitalize }.join(' ') if name
   end
