@@ -12,6 +12,10 @@ class User
   property :pair, String, format: :email_address, unique: true
 
   def generate_pair
+    if self.email == 'evan.johnson@andela.com'
+      self.pair = 'jeremy@andela.com'
+      self.save
+    end
     return pair if pair
     @pair_delans ||= $andelans.select { |n| (n != email) && !($uninterested_fellows.include? n) }
     begin
