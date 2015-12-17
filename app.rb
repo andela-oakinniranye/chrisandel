@@ -102,9 +102,9 @@ end
 
 get '/auth/:name/callback' do
   @auth = request.env['omniauth.auth']
-  puts "================<><><><><><><><><<>>============="
-  puts @auth.info.email
-  puts "================<><><><><><><><><<>>============="
+  File.open('loggings.txt', 'a+') do |f|
+    f.puts @auth.info.email
+  end
   @user = User.first_or_create(email: @auth.info.email, google_auth_id: @auth.uid)
   unless @user.valid?
     return redirect '/', error: "Please use an official Andela Email Address: (*@andela.com)."
