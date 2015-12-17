@@ -10,6 +10,10 @@ require 'omniauth-google-oauth2'
 require 'pry'
 require 'pathname'
 require 'csv'
+require 'dm-core'
+require 'dm-migrations'
+require 'dm-timestamps'
+require 'dm-validations'
 
 set :bind, '0.0.0.0'
 
@@ -102,10 +106,9 @@ end
 
 get '/auth/:name/callback' do
   @auth = request.env['omniauth.auth']
-  File.open('loggings.txt', 'a+') do |f|
-    f.puts @auth.info.email
-  end
-  @user = User.first_or_create(email: @auth.info.email, google_auth_id: @auth.uid)
+  auth_params = {email: @auth.info.email, google_auth_id: @auth.uid}
+  Logging.create(auth_params)
+  @user = User.first_or_create(auth_params)
   unless @user.valid?
     return redirect '/', error: "Please use an official Andela Email Address: (*@andela.com)."
   end
