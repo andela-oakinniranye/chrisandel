@@ -6,6 +6,13 @@
           <div><%= current_user.pair.name_from_email %></div>
           <div><%= current_user.pair %></div>
         <% end %>
+        <hr class="divider">
+        <% if my_pair %>
+          <div class="santa-div">
+            <div class="my-santa"><span>My Santa: </span><%= my_pair.email.name_from_email %></div>
+            <div class="my-santa"><%= my_pair.email %></div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

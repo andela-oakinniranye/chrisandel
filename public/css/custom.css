@@ -16,3 +16,16 @@ header{
   background-color: #fdb94e;
   color: white;
 }
+
+.santa-div{
+  font-size: 0.7em;
+}
+
+.my-santa{
+  color: #68591F;
+}
+
+.divider{
+  padding: 0;
+  margin: 0;
+}

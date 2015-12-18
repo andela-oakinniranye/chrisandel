@@ -141,6 +141,10 @@ helpers do
     @user = User.get(session[:user_id]) if session[:user_id]
   end
 
+  def my_pair
+    current_user.my_pair if current_user
+  end
+
   def authorized_users
     %w(akonam.ikpelue@andela.com helen.eboagwu@andela.com gbenga@andela.com sayo.alagbe@andela.com oreoluwa.akinniranye@andela.com chidi.ash@andela.com)
   end

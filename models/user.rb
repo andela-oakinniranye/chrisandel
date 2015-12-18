@@ -27,6 +27,10 @@ class User
     self.gift_for_pair || 'No Gift Registered Yet'
   end
 
+  def my_pair
+    User.first(pair: self.email)
+  end
+
   class << self
     def paired
       all(:pair.not => nil)
