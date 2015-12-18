@@ -14,11 +14,15 @@ require 'dm-core'
 require 'dm-migrations'
 require 'dm-timestamps'
 require 'dm-validations'
+# require 'google/api_client'
 
 set :bind, '0.0.0.0'
 
-$andela_mail = /.*@andela.com$/
+use Rack::Session::Cookie, secret: 'abcdefg'
+enable :sessions
 
+$user_gifts = {}
+$andela_mail = /.*@andela.com$/
 Object.class_eval do
   def blank?
     respond_to?(:empty?) ? !!empty? : !self
@@ -33,17 +37,8 @@ String.class_eval do
   end
 end
 
-    ande = CSV.open('andelans.csv').to_a.flatten
-    gifts = CSV.open('santa_responses.csv', headers: true)
-    $user_gifts = {}
-    gifts.each{ |user|
-      user_name = user['Username']
-      next if user_name.blank?
-      user_name = user_name.strip
-      gift =  user["What gifts would you like? Put in your wishlist! Three options only, please!"]
-      $user_gifts[user_name] = gift
-    }
 
+    ande = CSV.open('andelans.csv').to_a.flatten
     $andelans = LazyArray.new
     ande.each{ |n|
       if n
@@ -71,8 +66,6 @@ use OmniAuth::Builder do
   provider :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"]
 end
 
-use Rack::Session::Cookie, secret: 'abcdefg'
-enable :sessions
 
 get '/' do
   return redirect '/home' if current_user
