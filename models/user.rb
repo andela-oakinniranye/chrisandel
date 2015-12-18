@@ -108,11 +108,7 @@ class User
           end
           paired_w = first(pair: user)
           paired_w.update(gift_for_pair: gift) if paired_w
-          # $user_gifts = {}
-          # $user_gifts[user] = gift
         end
     end
-
-    # populate_registry
   end
 end
