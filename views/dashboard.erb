@@ -12,19 +12,21 @@
           <table class="table table-striped table-bordered table-hover" id="sample_1">
             <thead>
               <tr>
-                <th>Not Registered</th>
+                <!-- <th>Not Registered</th> -->
                 <th>All Registered Users</th>
-                <th>Registered But Not Paired</th>
-                <th>Registered And Paired</th>
+                <th>Registered With Santee</th>
+                <th>Registered But No Santee</th>
+                <th>Paired But No Santa</th>
               </tr>
             </thead>
             <tbody>
               <% @recs.times do |u|%>
               <tr class="odd gradeX">
-                <td><%= @not_registered[u] %></td>
-                <td><%= @registered[u] %></td>
-                <td><%= @registered_but_unpaired[u].email if @registered_but_unpaired[u] %></td>
+                <!-- <td><%#= @not_registered[u] %></td> -->
+                <td><%= @registered[u].email %></td>
                 <td><%= @registered_and_paired[u].email if @registered_and_paired[u] %></td>
+                <td><%= @registered_but_unpaired[u].email if @registered_but_unpaired[u] %></td>
+                <td><%= @registered_but_no_santa[u].email if @registered_but_no_santa[u] %></td>
               </tr>
               <% end %>
             </tbody>

@@ -8,10 +8,10 @@
             <% if current_user %>
               <li class="active"><a href="#">Account </a>
               <ul class="dropdown">
-                <% if authorized_users.include? current_user.email %>
+                <% if current_user.admin? %>
                   <li><a href="/dashboard">Dashboard</a></li>
                 <% end %>
-                <% if current_user.pair%>
+                <% if current_user.paired?%>
                   <li><a href="#" data-toggle="modal" data-target="#pair_giftModal">View Pair's Wishlist</a></li>
                 <% end %>
                 <li><a href="/view_pair">View Pair</a></li>
@@ -27,7 +27,7 @@
     </div>
   </header>
 
-  <% if current_user && current_user.pair %>
+  <% if current_user && current_user.paired? %>
     <%= erb :pair_gift %>
   <% end %>
   <!-- End Header -->

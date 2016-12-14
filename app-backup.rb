@@ -22,9 +22,7 @@ use Rack::Session::Cookie, secret: 'abcdefg'
 enable :sessions
 
 $user_gifts = {}
-ANDELA_MAIL_FORMAT = /.*@andela.com$/
-ADMIN_USERS = %w(akonam.ikpelue@andela.com helen.eboagwu@andela.com gbenga@andela.com sayo.alagbe@andela.com oreoluwa.akinniranye@andela.com chidi.ash@andela.com)
-
+$andela_mail = /.*@andela.com$/
 Object.class_eval do
   def blank?
     respond_to?(:empty?) ? !!empty? : !self
@@ -40,6 +38,21 @@ String.class_eval do
 end
 
 
+    ande = CSV.open('andelans.csv').to_a.flatten
+    $andelans = LazyArray.new
+    ande.each{ |n|
+      if n
+        n = n.strip
+        $andelans << n if n.match($andela_mail)
+      end
+    }
+
+    uninterested_fellows = CSV.open('uninterested.csv').to_a.flatten.select! do |f|
+      f && f.match($andela_mail)
+    end
+
+    $uninterested_fellows = uninterested_fellows || []
+
 APP_ROOT = Pathname.new(File.expand_path('../', __FILE__))
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
@@ -49,21 +62,10 @@ Dir[APP_ROOT.join('models', '*.rb')].each { |file| require file }
 DataMapper.finalize
 DataMapper.auto_upgrade!
 
-User.all.update(interested_2016: false)
-
-ande = CSV.foreach('secret-santa-2016.csv', headers: true) do |n|
-  if n['interested'] == 'Yes'
-    user = User.first_or_create(email: n['email'])
-    update_attrs = {interested_2016: true}
-    update_attrs.merge!(admin: true) if ADMIN_USERS.include? user.email
-    user.update(update_attrs)
-  end
-end
-
-
 use OmniAuth::Builder do
   provider :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"]
 end
+
 
 get '/' do
   return redirect '/home' if current_user
@@ -82,14 +84,7 @@ post '/get_pair' do
   user_id = params[:uuser]
   user = User.first(google_auth_id: user_id)
   return redirect '/' unless user
-  halt 400, "Sorry, pairing has ended" unless exercise_schedule.still_pairing?
-  halt 403, "Sorry, you did not indicate interest in the Secret Santa activity" unless user.interested_2016?
-
-  santee = user.generate_pair
-  {
-    name: santee.email.name_from_email,
-    email: santee.email
-  }.to_json
+  user.generate_pair
 end
 
 get '/login' do
@@ -120,18 +115,17 @@ get '/logout' do
 end
 
 get '/dashboard' do
-  return redirect '/', error: "You are not authorized to visit this route" unless current_user.admin?
-  @registered_but_unpaired = User.registered.unpaired
-  # @not_registered = User.not_registered
-  @registered = User.registered
+  return redirect '/', error: "You are not authorized to visit this route" unless(current_user && (authorized_users.include? current_user.email ))
+  @registered_but_unpaired = User.unpaired
+  @not_registered = User.not_registered
+  @registered = User.all_registered
   @registered_and_paired = User.paired
-  @registered_but_no_santa = User.paired.without_santas
-  @recs = [@registered_but_unpaired.size, @registered.size, @registered_and_paired.size, @registered_but_no_santa.size].max
+  @recs = [@registered_but_unpaired.size, @not_registered.size, @registered.size, @registered_and_paired.size].max
   erb :dashboard, layout: :admin
 end
 
 get '/all_pairs' do
-  return redirect '/', error: "You are not authorized to visit this route" unless current_user.admin?
+  return redirect '/', error: "You are not authorized to visit this route" unless(current_user && (authorized_users.include? current_user.email))
   @users = User.paired
   erb :all_pairs, layout: :admin
 end
@@ -148,42 +142,10 @@ helpers do
   end
 
   def my_pair
-    current_user.santa if current_user
+    current_user.my_pair if current_user
   end
 
-  def exercise_schedule
-    @schedule ||= Schedule.first_or_create(current: true) # should be moved to an admin side
+  def authorized_users
+    %w(akonam.ikpelue@andela.com helen.eboagwu@andela.com gbenga@andela.com sayo.alagbe@andela.com oreoluwa.akinniranye@andela.com chidi.ash@andela.com)
   end
 end
-
-
-# error NotInterestedException do
-#   "Sorry, you did not indicate interest in the Secret Santa activity"
-# end
-
-
-# ande = CSV.open('secret-santa-2016.csv')#.to_a.flatten
-# $andelans = LazyArray.new
-# ande.each{ |n|
-#   require 'pry' ; binding.pry
-#   if n
-#     n = n.strip
-#     $andelans << n if n.match($andela_mail)
-#   end
-# }
-
-
-    # ande = CSV.open('andelans.csv').to_a.flatten
-    # $andelans = LazyArray.new
-    # ande.each{ |n|
-    #   if n
-    #     n = n.strip
-    #     $andelans << n if n.match($andela_mail)
-    #   end
-    # }
-    #
-    # uninterested_fellows = CSV.open('uninterested.csv').to_a.flatten.select! do |f|
-    #   f && f.match($andela_mail)
-    # end
-    #
-    # $uninterested_fellows = uninterested_fellows || []

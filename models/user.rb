@@ -5,57 +5,81 @@ class User
 
   property :id, Serial
   property :google_auth_id, String
-  property :email, String, format: ->(n) { $andelans.include? n }, required: true, unique: true
+  property :email, String, format: ->(n) { n.match(ANDELA_MAIL_FORMAT) }, required: true, unique: true
   property :pair, String, format: :email_address, unique: true
   property :gift_for_pair, Text
+  property :admin, Boolean, default: false
+  property :interested_2016, Boolean
+  property :wishlist, Text
+
+  belongs_to :santee, 'User' , required: false
+  has 1, :santa, 'User', child_key: :santee_id
+
+  def unpaired?
+    santee.nil?
+  end
+
+  def paired?
+    santee
+  end
 
   def generate_pair
-    return pair if pair
-    # all_unpaired
-    @pair_delans ||= $andelans.select { |n| (n != email) && !($uninterested_fellows.include? n) }
+    return santee if santee
+    unpaired = User.unpaired
     begin
-      pair = @pair_delans.sample
-      pair_user = User.first(email: pair)
-
-      self.pair = pair
-    end while(User.first(pair: pair) || email == pair || (pair_user && pair_user.pair == email))
+      potential_pair = unpaired.sample
+      self.santee = potential_pair
+    end while pair_taken(potential_pair) || paired_with_self?(potential_pair) || santa_is_santee?(potential_pair)
     save
-    self.pair
+    santee
+  end
+
+  def pair_taken(pair)
+    User.first(santee: pair)
+  end
+
+  def paired_with_self?(pair)
+    self == pair
+  end
+
+  def santa_is_santee?(pair)
+    (pair.santee == self)
   end
 
   def pair_gift
-    self.gift_for_pair || 'No Gift Registered Yet'
-  end
-
-  def my_pair
-    User.first(pair: self.email)
+    santee.wishlist
   end
 
   class << self
+    def registered
+      all(interested_2016: true)
+    end
+
     def paired
-      all(:pair.not => nil)
+      all(:santee.not => nil)
     end
 
     def unpaired
-      all(pair: nil)
+      all(santee: nil)
     end
 
-    def not_registered
-      registered = all_registered
-      $andelans.select do |n|
-        !registered.include?(n) && !$uninterested_fellows.include?(n)
-      end
+    def not_interested
+      all(interested_2016: false)
     end
 
     def all_registered
       collect(&:email)
     end
 
+    def without_santas
+      all(santa: nil)
+    end
+
     def breakpoints
       select do |user|
-        pair = user.pair
-        pair_user = first(email: pair)
-        (pair_user && pair_user.pair == user.email)
+        pair = user.santee
+        next if pair.nil?
+        user.santa_is_santee?(pair) || user.paired_with_self?(pair)
       end
     end
 
@@ -116,3 +140,49 @@ class User
     end
   end
 end
+
+
+# self.gift_for_pair || 'No Gift Registered Yet'
+
+
+
+
+
+  # def my_pair
+  #   User.first(pair: self.email)
+  # end
+
+  # has 1, :pairing, child_key: [:santee_id]
+  # has 1, :santa, through: :pairing, via: :santa
+  # has n, :santa, :child_key => [ :source_id ]
+  # has n, :santee, self, :through => :friendships, :via => :target
+  # belongs_to :user
+  #
+  # has
+  # property :pair_2016, User, format: :email_address, unique: true
+
+  # def paired
+  #   all(:pair.not => nil)
+  # end
+
+  # def not_registered
+  #   registered = all_registered
+  #   $andelans.select do |n|
+  #     !registered.include?(n) && !$uninterested_fellows.include?(n)
+  #   end
+  # end
+
+  # def unpaired
+  #   all(pair: nil)
+  # end
+
+
+
+    #
+    # def breakpoints
+    #   select do |user|
+    #     pair = user.pair
+    #     pair_user = first(email: pair)
+    #     (pair_user && pair_user.pair == user.email)
+    #   end
+    # end
